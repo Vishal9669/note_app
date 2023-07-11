@@ -15,7 +15,7 @@
 # gem 'pg'
 #
 default: &default
-  database: notes_app_test
+  database: notes_app_development
   adapter: postgresql
   encoding: unicode
   pool: 5
