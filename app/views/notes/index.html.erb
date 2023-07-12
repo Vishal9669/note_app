@@ -1,0 +1,60 @@
+<style>
+  .note-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .note-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 200px;
+    text-align: center;
+  }
+
+  .note-card h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .note-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+  }
+
+  .note-card a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .note-card a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<h1 style=color:red> Notes Dashboard </h1>
+
+<%= link_to 'New Note', new_note_path %><br><br>
+
+<div class="note-container">
+  <% @notes.each do |note| %>
+    <div class="note-card">
+      <h2><%= note.title %></h2>
+      <p><%= note.content %></p><br><br>
+
+      <div>
+        <%= link_to 'Edit', edit_note_path(note) %><br>
+        <%= link_to 'Destroy', note,
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  <% end %>
+</div>

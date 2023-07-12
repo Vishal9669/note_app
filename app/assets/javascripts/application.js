@@ -14,3 +14,14 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+document.addEventListener('turbolinks:load', function() {
+  var flashMessages = document.querySelectorAll('.flash-notice');
+  flashMessages.forEach(function(flashmessage) {
+    setTimeout(function() {
+      flashmessage.remove();
+    }, 5000);
+  });
+});
