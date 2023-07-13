@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  root 'notes#index'
+  root to: 'notes#index'
   resources :notes
+  resources :trash_notes  do
+    member do
+      patch :restore
+    end
+  end
 end

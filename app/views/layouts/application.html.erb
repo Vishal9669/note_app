@@ -10,7 +10,6 @@
   </head>
 
   <body>
-
     <% flash.each do |key, value| %>
       <div class="flash-notice" style="color: red;">
         <%= value %>
@@ -18,6 +17,5 @@
     <% end %>
 
     <%= yield %>
-
   </body>
 </html>

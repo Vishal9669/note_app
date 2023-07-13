@@ -39,7 +39,9 @@
   }
 </style>
 
-<h1 style=color:red> Notes Dashboard </h1>
+<h1 style=color:red>Notes</h1>
+
+<%= link_to 'Move to Trash', trash_notes_path %><br><br>
 
 <%= link_to 'New Note', new_note_path %><br><br>
 
@@ -48,9 +50,8 @@
     <div class="note-card">
       <h2><%= note.title %></h2>
       <p><%= note.content %></p><br><br>
-
       <div>
-        <%= link_to 'Edit', edit_note_path(note) %><br>
+        <%= link_to 'Edit', edit_note_path(note) %><br><br>
         <%= link_to 'Destroy', note,
             method: :delete,
             data: { confirm: 'Are you sure?' } %>

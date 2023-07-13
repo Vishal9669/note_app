@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notes = Note.all
+    @notes = Note.active
   end
 
   def show
@@ -34,8 +34,8 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note.destroy
-    redirect_to notes_url, flash: { success: 'Note was successfully destroyed.' }
+    @note.move_to_trash
+    redirect_to notes_url, flash: { success: 'Note was successfully saved in trash for 30 days.' }
   end
 
   private
