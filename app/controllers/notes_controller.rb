@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy, :archive, :unarchive]
+  before_action :set_note, only: [:show, :edit, :update, :destroy, :archive, :unarchive, :pin, :unpin]
 
   def index
-    @notes = Note.where(archived: false, deleted: false)
+    @notes = Note.where(archived: false, deleted: false).order(pinned: :desc)
   end
 
   def archive_index
@@ -20,7 +20,7 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      redirect_to @note, flash: { success: 'Note was successfully created.' }
+      redirect_to notes_url, flash: { success: 'Note was successfully created.' }
     else
       render :new
     end
@@ -50,6 +50,16 @@ class NotesController < ApplicationController
   def unarchive
     @note.update(archived: false)
     redirect_to notes_path, notice: 'Note unarchived successfully.'
+  end
+
+  def pin
+    @note.update(pinned: true)
+    redirect_to notes_path, notice: 'Note pinned successfully.'
+  end
+
+  def unpin
+    @note.update(pinned: false)
+    redirect_to notes_path, notice: 'Note unpinned successfully.'
   end
 
   private

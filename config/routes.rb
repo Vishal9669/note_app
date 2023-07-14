@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     member do
       patch :archive
       patch :unarchive
+      post 'pin', to: 'notes#pin'
+      post 'unpin', to: 'notes#unpin'
     end
     collection do
       get :archive_index
