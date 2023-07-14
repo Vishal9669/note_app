@@ -1,8 +1,9 @@
 class NotesController < ApplicationController
+  include Pagy::Backend
   before_action :set_note, only: [:show, :edit, :update, :destroy, :archive, :unarchive, :pin, :unpin]
 
   def index
-    @notes = Note.where(archived: false, deleted: false).order(pinned: :desc)
+   @pagy, @notes = pagy(Note.where(archived: false, deleted: false).order(pinned: :desc), items: 10)
   end
 
   def archive_index
