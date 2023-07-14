@@ -1,8 +1,12 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: [:show, :edit, :update, :destroy, :archive, :unarchive]
 
   def index
-    @notes = Note.active
+    @notes = Note.where(archived: false, deleted: false)
+  end
+
+  def archive_index
+    @archived_notes = Note.where(archived: true)
   end
 
   def show
@@ -36,6 +40,16 @@ class NotesController < ApplicationController
   def destroy
     @note.move_to_trash
     redirect_to notes_url, flash: { success: 'Note was successfully saved in trash for 30 days.' }
+  end
+
+  def archive
+    @note.update(archived: true)
+    redirect_to notes_path, notice: 'Note archived successfully.'
+  end
+
+  def unarchive
+    @note.update(archived: false)
+    redirect_to notes_path, notice: 'Note unarchived successfully.'
   end
 
   private

@@ -10,9 +10,8 @@
     padding: 10px;
     background-color: #f8f8f8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    height: 200px;
-    text-align: center;
+    width: 300px;
+    margin: 10px;
   }
 
   .note-card h2 {
@@ -39,26 +38,16 @@
   }
 </style>
 
-<h1 style=color:red>Notes</h1>
+<h1 style="color:red">Archived Notes</h1>
 
-<%= link_to 'Move to Trash', trash_notes_path %><br><br>
-<%= link_to 'Archived Notes', archive_index_notes_path %><br><br>
-
-<%= link_to 'Create Note', new_note_path %><br><br>
+<%= link_to 'Back to Notes', notes_path %><br><br>
 
 <div class="note-container">
-  <% @notes.each do |note| %>
+  <% @archived_notes.each do |note| %>
     <div class="note-card">
       <h2><%= note.title %></h2>
-      <p><%= note.content %></p><br><br>
-      <div>
-        <%= link_to 'Edit', edit_note_path(note) %><br><br>
-        <%= link_to 'Destroy', note,
-            method: :delete,
-            data: { confirm: 'Are you sure,Note moved to trash?' } %><br><br>
-        <%= link_to 'Archive', archive_note_path(note), method: :patch %>
-      </div>
-
+      <p><%= note.content %></p><br>
+      <%= link_to 'Unarchive', unarchive_note_path(note), method: :patch %>
     </div>
   <% end %>
 </div>
