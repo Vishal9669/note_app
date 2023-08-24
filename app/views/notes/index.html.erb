@@ -61,6 +61,7 @@
     .note-card a:hover {
       text-decoration: underline;
     }
+
   </style>
 </head>
 <body>
@@ -69,6 +70,17 @@
   <a href="<%= new_note_path %>">Create Note</a>
   <a href="<%= archive_index_notes_path %>">Archived Notes</a>
   <a href="<%= trash_notes_path %>">Trash Notes</a>
+  <a>
+    <div style="position: absolute; top: 5; right: 15px; color:white;">
+      <% if user_signed_in? && current_user.present? %>
+        <span>Welcome, <%= current_user.name %></span>
+    </div>
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+    <% end %>
+  </a>
 </div><br>
 
 <div class="note-container">
