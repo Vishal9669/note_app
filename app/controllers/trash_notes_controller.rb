@@ -2,7 +2,7 @@ class TrashNotesController < ApplicationController
   before_action :set_trash_note, only: [:destroy, :restore]
 
   def index
-    @trash_notes = Note.deleted
+    @trash_notes = current_user.notes.deleted
   end
 
   def destroy
@@ -11,7 +11,7 @@ class TrashNotesController < ApplicationController
   end
 
   def restore
-    @note = Note.new(
+    @note = current_user.notes.new(
       title: @trash_note.title,
       content: @trash_note.content
     )
@@ -27,7 +27,7 @@ class TrashNotesController < ApplicationController
   private
 
   def set_trash_note
-    @trash_note = Note.find(params[:id])
+    @trash_note = current_user.notes.find(params[:id])
   end
 
   def trash_note_params
