@@ -1,8 +1,10 @@
 class Note < ApplicationRecord
+  belongs_to :user
   has_one :trash_note
   before_create :set_archived
   before_create :set_pinned
   scope :deleted, -> { where(deleted: true) }
+  validates :user, presence: true
 
   def move_to_trash
     update(deleted: true, deleted_at: Time.now)
