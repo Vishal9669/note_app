@@ -1,46 +1,25 @@
-<style>
-  .note-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-  }
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Archieve Note</title>
+    <%= stylesheet_link_tag 'styles' %>
+  </head>
 
-  .note-card h2 {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
+  <body>
+    <h1 style="color:red">Trash Notes</h1>
+    <%= link_to 'Back to Notes', notes_path %><br><br>
 
-  .note-card p {
-    color: #777;
-    margin-bottom: 5px;
-  }
-
-  .note-card p.deleted {
-    color: #f00;
-  }
-
-  .note-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-</style>
-
-<h1 style="color:red">Trash Notes</h1>
-
-<%= link_to 'Back to Notes', notes_path %><br><br>
-
-<div class="note-container">
-  <% @trash_notes.each do |trash_note| %>
-    <div class="note-card">
-      <h2><%= trash_note.title %></h2>
-      <p><%= trash_note.content %></p><br><br>
-      <%= link_to 'Destroy', trash_note_path(trash_note),
-          method: :delete,
-          data: { confirm: 'Are you sure?' } %><br><br>
-      <%= link_to 'Restore', restore_trash_note_path(trash_note), method: :patch %>
-      </div>
-  <% end %>
-</div>
+    <div class="note-container">
+      <% @trash_notes.each do |trash_note| %>
+        <div class="note-card">
+          <h2><%= trash_note.title %></h2>
+          <p><%= trash_note.content %></p><br><br>
+          <%= link_to 'Destroy', trash_note_path(trash_note),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %><br><br>
+          <%= link_to 'Restore', restore_trash_note_path(trash_note), method: :patch %>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

@@ -1,19 +1,15 @@
-<style>
-  .note-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Archieve Note</title>
+    <%= stylesheet_link_tag 'styles' %>
+  </head>
 
-  .note-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #f8f8f8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: 10px;
-  }
+  <body>
+    <h1 style="color:red">Archived Notes</h1>
+    <%= link_to 'Back to Notes', notes_path %><br><br>
 
+<<<<<<< Updated upstream
   .note-card h2 {
     margin: 0;
     font-size: 18px;
@@ -48,6 +44,16 @@
       <h2><%= note.title %></h2>
       <p><%= note.content %></p><br>
       <%= link_to 'Unarchive', unarchive_note_path(note), method: :patch %>
+=======
+    <div class="note-container">
+      <% @archived_notes.each do |note| %>
+        <div class="note-card">
+          <h2><%= note.title %></h2>
+          <p><%= note.content %></p><br>
+          <%= link_to 'Unarchive', unarchive_note_path(note), method: :patch %>
+        </div>
+      <% end %>
+>>>>>>> Stashed changes
     </div>
-  <% end %>
-</div>
+  </body>
+</html>
