@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   root to: 'notes#index'
 
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
       get :archive_index
     end
   end
+
   resources :trash_notes  do
     member do
       patch :restore

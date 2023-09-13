@@ -9,42 +9,6 @@
     <h1 style="color:red">Archived Notes</h1>
     <%= link_to 'Back to Notes', notes_path %><br><br>
 
-<<<<<<< Updated upstream
-  .note-card h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .note-card p {
-    margin: 0;
-    font-size: 14px;
-    color: #777;
-  }
-
-  .note-card a {
-    color: #333;
-    text-decoration: none;
-    margin-right: 10px;
-  }
-
-  .note-card a:hover {
-    text-decoration: underline;
-  }
-</style>
-
-<h1 style="color:red">Archived Notes</h1>
-
-<%= link_to 'Back to Notes', notes_path %><br><br>
-
-<div class="note-container">
-  <% @archived_notes.each do |note| %>
-    <div class="note-card">
-      <h2><%= note.title %></h2>
-      <p><%= note.content %></p><br>
-      <%= link_to 'Unarchive', unarchive_note_path(note), method: :patch %>
-=======
     <div class="note-container">
       <% @archived_notes.each do |note| %>
         <div class="note-card">
@@ -53,7 +17,6 @@
           <%= link_to 'Unarchive', unarchive_note_path(note), method: :patch %>
         </div>
       <% end %>
->>>>>>> Stashed changes
     </div>
   </body>
 </html>

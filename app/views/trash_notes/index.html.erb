@@ -5,21 +5,19 @@
     <%= stylesheet_link_tag 'styles' %>
   </head>
 
-  <body>
-    <h1 style="color:red">Trash Notes</h1>
-    <%= link_to 'Back to Notes', notes_path %><br><br>
+  <h1 style="color:red">Trash Notes</h1>
+  <%= link_to 'Back to Notes', notes_path %><br><br>
 
-    <div class="note-container">
-      <% @trash_notes.each do |trash_note| %>
-        <div class="note-card">
-          <h2><%= trash_note.title %></h2>
-          <p><%= trash_note.content %></p><br><br>
-          <%= link_to 'Destroy', trash_note_path(trash_note),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %><br><br>
-          <%= link_to 'Restore', restore_trash_note_path(trash_note), method: :patch %>
+  <div class="note-container">
+    <% @trash_notes.each do |trash_note| %>
+      <div class="note-card">
+        <h2><%= trash_note.title %></h2>
+        <p><%= trash_note.content %></p><br><br>
+        <%= link_to 'Destroy', trash_note_path(trash_note),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %><br><br>
+        <%= link_to 'Restore', restore_trash_note_path(trash_note), method: :patch %>
         </div>
-      <% end %>
-    </div>
-  </body>
+    <% end %>
+  </div>
 </html>
