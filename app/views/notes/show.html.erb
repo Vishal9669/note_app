@@ -1,5 +1,4 @@
 <h1>Note</h1>
-
 <table>
   <tr>
     <th>Title:</th>
@@ -9,8 +8,7 @@
     <th>Content:</th>
     <td><%= @note.content %></td>
   </tr>
-</table>
-<br>
+</table><br>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Edit', edit_note_path(@note) %>
 <%= link_to 'Back', notes_path %>

@@ -25,6 +25,10 @@
     margin: 0;
     font-size: 14px;
     color: #777;
+    display: block;
+    max-height: 100px;
+    overflow-y: auto;
+    white-space: pre-line;
   }
 
   .note-card a {
@@ -39,7 +43,6 @@
 </style>
 
 <h1 style="color:red">Archived Notes</h1>
-
 <%= link_to 'Back to Notes', notes_path %><br><br>
 
 <div class="note-container">

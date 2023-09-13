@@ -1,112 +1,114 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HomePage</title>
-  <style>
+  <head>
+    <title>HomePage</title>
+    <style>
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
 
-    .navbar {
-      background-color: #333;
-      overflow: hidden;
-    }
+      .navbar a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
 
-    .navbar a {
-      float: left;
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
 
-    .navbar a:hover {
-      background-color: #ddd;
-      color: black;
-    }
+      .note-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
-    .note-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
+      .note-card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #f8f8f8;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 290px;
+        height: 250px;
+        text-align: left;
+      }
 
-    .note-card {
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 10px;
-      background-color: #f8f8f8;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      width: 290px;
-      height: 250px;
-      text-align: left;
-    }
+      .note-card h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
 
-    .note-card h2 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+      .note-card p {
+        margin: 0;
+        font-size: 14px;
+        color: #777;
+        display: block;
+        max-height: 100px;
+        overflow-y: auto;
+        white-space: pre-line;
+      }
 
-    .note-card p {
-      margin: 0;
-      font-size: 14px;
-      color: #777;
-    }
+      .note-card a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+      }
 
-    .note-card a {
-      color: #333;
-      text-decoration: none;
-      margin-right: 10px;
-    }
+      .note-card a:hover {
+        text-decoration: underline;
+      }
 
-    .note-card a:hover {
-      text-decoration: underline;
-    }
+    </style>
+  </head>
 
-  </style>
-</head>
-<body>
-
-<div class="navbar">
-  <a href="<%= new_note_path %>">Create Note</a>
-  <a href="<%= archive_index_notes_path %>">Archived Notes</a>
-  <a href="<%= trash_notes_path %>">Trash Notes</a>
-  <a>
-    <div style="position: absolute; top: 5; right: 15px; color:white;">
-      <% if user_signed_in? && current_user.present? %>
-        <span>Welcome, <%= current_user.name %></span>
-    </div>
-    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <li><%= link_to 'Sign In', new_user_session_path %></li>
-      <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-    <% end %>
-  </a>
-</div><br>
-
-<div class="note-container">
-  <% @notes.each do |note| %>
-      <div class="note-card">
-        <h2><%= note.title %></h2>
-        <p><%= note.content %></p><br><br>
-        <div>
-          <%= link_to 'Edit', edit_note_path(note) %><br>
-          <%= link_to 'Destroy', note,
-              method: :delete,
-              data: { confirm: 'Are you sure, Note moved to trash?' } %><br>
-          <%= link_to 'Archive', archive_note_path(note), method: :patch %><br>
-          <td>
-            <% if note.pinned %>
-              <%= link_to 'Unpin', unpin_note_path(note), method: :post %>
-            <% else %>
-              <%= link_to 'Pin', pin_note_path(note), method: :post %>
-            <% end %>
-          </td>
+  <body>
+    <div class="navbar">
+      <a href="<%= new_note_path %>">Create Note</a>
+      <a href="<%= archive_index_notes_path %>">Archived Notes</a>
+      <a href="<%= trash_notes_path %>">Trash Notes</a>
+      <a>
+        <div style="position: absolute; top: 5; right: 15px; color:white;">
+          <% if user_signed_in? && current_user.present? %>
+            <span>Welcome, <%= current_user.name %></span>
         </div>
-      </div>
-  <% end %>
-</div><br>
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
+      </a>
+    </div><br>
 
-<%== pagy_nav(@pagy) %>
+    <div class="note-container">
+      <% @notes.each do |note| %>
+          <div class="note-card">
+            <h2><%= note.title %></h2>
+            <p><%= note.content %></p><br><br>
+            <div>
+              <%= link_to 'Edit', edit_note_path(note) %><br>
+              <%= link_to 'Destroy', note,
+                  method: :delete,
+                  data: { confirm: 'Are you sure, Note moved to trash?' } %><br>
+              <%= link_to 'Archive', archive_note_path(note), method: :patch %><br>
+              <td>
+                <% if note.pinned %>
+                  <%= link_to 'Unpin', unpin_note_path(note), method: :post %>
+                <% else %>
+                  <%= link_to 'Pin', pin_note_path(note), method: :post %>
+                <% end %>
+              </td>
+            </div>
+          </div>
+      <% end %>
+    </div><br>
 
-</body>
+    <%== pagy_nav(@pagy) %>
+  </body>
 </html>
